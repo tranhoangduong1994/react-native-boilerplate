@@ -2,7 +2,7 @@ package com.confidentialproject;
 
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
-import com.facebook.react.shell.MainReactPackage;
+import com.reactcommunity.rnlocalize.RNLocalizePackage;
 import com.reactnativenavigation.NavigationApplication;
 import com.reactnativenavigation.react.NavigationReactNativeHost;
 import com.reactnativenavigation.react.ReactGateway;
@@ -29,6 +29,7 @@ public class MainApplication extends NavigationApplication {
 
     protected List<ReactPackage> getPackages() {
         return Arrays.<ReactPackage>asList(
+                new RNLocalizePackage()
         );
     }
 

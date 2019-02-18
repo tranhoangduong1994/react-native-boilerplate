@@ -8,8 +8,11 @@
   },
   "dependencies": {
     "@agiletechvn/react-theme": "https://github.com/tranhoangduong1994/react-theme.git",
+    "i18n-js": "^3.2.1",
+    "lodash.memoize": "^4.1.2",
     "react": "16.6.3",
     "react-native": "0.58.4",
+    "react-native-localize": "^1.0.3",
     "react-native-navigation": "^2.12.0",
     "redux": "^4.0.1",
     "redux-saga": "^1.0.1"

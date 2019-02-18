@@ -1,6 +1,7 @@
 import { Navigation } from 'react-native-navigation';
 import registerScreens from './src/screens';
 import images from './assets/images';
+import { setI18nConfig, RNLocalize, t } from './src/utils/LocalizationUtils';
 
 const startApp = () => {
   Navigation.setDefaultOptions({
@@ -38,7 +39,7 @@ const startApp = () => {
                   ],
                   options: {
                     bottomTab: {
-                      text: 'Home',
+                      text: t('tabs.Home'),
                       icon: images.home
                     }
                   }
@@ -55,7 +56,7 @@ const startApp = () => {
                   ],
                   options: {
                     bottomTab: {
-                      text: 'Search',
+                      text: t('tabs.Search'),
                       icon: images.search
                     }
                   }
@@ -72,7 +73,7 @@ const startApp = () => {
                   ],
                   options: {
                     bottomTab: {
-                      text: 'Chat',
+                      text: t('tabs.Chat'),
                       icon: images.message
                     }
                   }
@@ -89,7 +90,7 @@ const startApp = () => {
                   ],
                   options: {
                     bottomTab: {
-                      text: 'Account',
+                      text: t('tabs.Account'),
                       icon: images.account
                     }
                   }
@@ -98,7 +99,7 @@ const startApp = () => {
             ],
             options: {
               bottomTabs: {
-                // titleDisplayMode: 'alwaysHide'
+                titleDisplayMode: 'alwaysShow'
               }
             }
           }
@@ -115,5 +116,9 @@ const startApp = () => {
 
 Navigation.events().registerAppLaunchedListener(() => {
   registerScreens();
+  setI18nConfig();
+  RNLocalize.addEventListener('change', () => {
+    setI18nConfig();
+  });
   startApp();
 });
