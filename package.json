@@ -7,9 +7,12 @@
     "test": "jest"
   },
   "dependencies": {
+    "@agiletechvn/react-theme": "https://github.com/tranhoangduong1994/react-theme.git",
     "react": "16.6.3",
     "react-native": "0.58.4",
-    "@agiletechvn/react-theme": "https://github.com/tranhoangduong1994/react-theme.git"
+    "react-native-navigation": "^2.12.0",
+    "redux": "^4.0.1",
+    "redux-saga": "^1.0.1"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.3.0",

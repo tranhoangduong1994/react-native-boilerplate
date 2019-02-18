@@ -1,17 +1,108 @@
-/**
- * @flow
- */
+import { Navigation } from 'react-native-navigation';
+import registerScreens from './src/screens';
 
-import React from 'react';
-import { View, Text } from 'react-native';
+const startApp = () => {
+  Navigation.setDefaultOptions({
+    statusBar: {
+      style: 'light'
+    },
+    layout: {
+      orientation: ['portrait']
+    },
+    topBar: {
+      visible: false
+    }
+  });
 
-type Props = {};
-export default class App extends React.Component<Props> {
-  render() {
-    return (
-      <View>
-        <Text testID="welcome">Welcome</Text>
-      </View>
-    );
-  }
-}
+  Navigation.setRoot({
+    root: {
+      sideMenu: {
+        left: {
+          component: {
+            name: 'LeftMenu'
+          }
+        },
+        center: {
+          bottomTabs: {
+            children: [
+              {
+                stack: {
+                  children: [
+                    {
+                      component: {
+                        name: 'Home'
+                      }
+                    }
+                  ],
+                  options: {
+                    bottomTab: {
+                      text: 'Home'
+                    }
+                  }
+                }
+              },
+              {
+                stack: {
+                  children: [
+                    {
+                      component: {
+                        name: 'Search'
+                      }
+                    }
+                  ],
+                  options: {
+                    bottomTab: {
+                      text: 'Search'
+                    }
+                  }
+                }
+              },
+              {
+                stack: {
+                  children: [
+                    {
+                      component: {
+                        name: 'Chat'
+                      }
+                    }
+                  ],
+                  options: {
+                    bottomTab: {
+                      text: 'Chat'
+                    }
+                  }
+                }
+              },
+              {
+                stack: {
+                  children: [
+                    {
+                      component: {
+                        name: 'Account'
+                      }
+                    }
+                  ],
+                  options: {
+                    bottomTab: {
+                      text: 'Account'
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        right: {
+          component: {
+            name: 'RightMenu'
+          }
+        }
+      }
+    }
+  });
+};
+
+Navigation.events().registerAppLaunchedListener(() => {
+  registerScreens();
+  startApp();
+});
