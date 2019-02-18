@@ -1,5 +1,6 @@
 import { Navigation } from 'react-native-navigation';
 import registerScreens from './src/screens';
+import images from './assets/images';
 
 const startApp = () => {
   Navigation.setDefaultOptions({
@@ -10,7 +11,8 @@ const startApp = () => {
       orientation: ['portrait']
     },
     topBar: {
-      visible: false
+      visible: false,
+      height: 0
     }
   });
 
@@ -36,7 +38,8 @@ const startApp = () => {
                   ],
                   options: {
                     bottomTab: {
-                      text: 'Home'
+                      text: 'Home',
+                      icon: images.home
                     }
                   }
                 }
@@ -52,7 +55,8 @@ const startApp = () => {
                   ],
                   options: {
                     bottomTab: {
-                      text: 'Search'
+                      text: 'Search',
+                      icon: images.search
                     }
                   }
                 }
@@ -68,7 +72,8 @@ const startApp = () => {
                   ],
                   options: {
                     bottomTab: {
-                      text: 'Chat'
+                      text: 'Chat',
+                      icon: images.message
                     }
                   }
                 }
@@ -84,12 +89,18 @@ const startApp = () => {
                   ],
                   options: {
                     bottomTab: {
-                      text: 'Account'
+                      text: 'Account',
+                      icon: images.account
                     }
                   }
                 }
               }
-            ]
+            ],
+            options: {
+              bottomTabs: {
+                // titleDisplayMode: 'alwaysHide'
+              }
+            }
           }
         },
         right: {
