@@ -13,11 +13,24 @@
   "devDependencies": {
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "24.1.0",
+    "detox": "^10.0.7",
     "jest": "24.1.0",
     "metro-react-native-babel-preset": "0.51.1",
+    "mocha": "^5.2.0",
     "react-test-renderer": "16.6.3"
   },
   "jest": {
     "preset": "react-native"
+  },
+  "detox": {
+    "configurations": {
+      "ios.sim.debug": {
+        "binaryPath": "ios/build/Build/Products/Debug-iphonesimulator/ConfidentialProject.app",
+        "build": "xcodebuild -project ios/ConfidentialProject.xcodeproj -scheme ConfidentialProject -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build",
+        "type": "ios.simulator",
+        "name": "iPhone 7"
+      }
+    },
+    "test-runner": "mocha"
   }
 }
