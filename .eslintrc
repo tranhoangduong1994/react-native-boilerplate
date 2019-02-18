@@ -25,7 +25,8 @@
     "no-unused-expressions": "off",
     "react/destructuring-assignment": "off",
     "react/no-multi-comp": "off",
-    "no-nested-ternary": "off"
+    "no-nested-ternary": "off",
+    "import/prefer-default-export": "off"
   },
   "plugins": ["react", "jsx-a11y", "import", "flowtype"],
   "globals": {

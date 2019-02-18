@@ -8,7 +8,8 @@
   },
   "dependencies": {
     "react": "16.6.3",
-    "react-native": "0.58.4"
+    "react-native": "0.58.4",
+    "@agiletechvn/react-theme": "https://github.com/tranhoangduong1994/react-theme.git"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.3.0",
