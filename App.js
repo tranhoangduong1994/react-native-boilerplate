@@ -10,7 +10,7 @@ export default class App extends React.Component<Props> {
   render() {
     return (
       <View>
-        <Text testID="welcome">{'Welcome'}</Text>
+        <Text testID="welcome">Welcome</Text>
       </View>
     );
   }
