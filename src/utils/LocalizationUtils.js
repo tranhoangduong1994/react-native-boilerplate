@@ -21,16 +21,11 @@ const setI18nConfig = () => {
 
   const { languageTag, isRTL } = RNLocalize.findBestAvailableLanguage(Object.keys(translationGetters)) || fallback;
 
-  console.log('t is', t);
-
   t.cache.clear();
   I18nManager.forceRTL(isRTL);
 
-  console.log('test language tag', languageTag);
   i18n.translations = { [languageTag]: translationGetters[languageTag]() };
   i18n.locale = languageTag;
-
-  console.log('test i18n', i18n);
 };
 
 export { t, setI18nConfig, RNLocalize };
