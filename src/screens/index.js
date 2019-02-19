@@ -23,10 +23,6 @@ const withStatusBarScreens: [ScreenComponent] = [
     component: LeftMenu
   },
   {
-    name: 'LeftMenu',
-    component: LeftMenu
-  },
-  {
     name: 'RightMenu',
     component: RightMenu
   },
