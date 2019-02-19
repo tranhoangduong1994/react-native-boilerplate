@@ -56,3 +56,6 @@ buck-out/
 *.jsbundle
 yarn.lock
 package-lock.json
+android/app/release/
+android/app/src/main/assets/
+android/app/src/main/res/drawable-mdpi/
