@@ -1,4 +1,9 @@
+/**
+ * @flow
+ */
+
 import { Navigation } from 'react-native-navigation';
+import codePush from 'react-native-code-push';
 import registerScreens from './src/screens';
 import images from './assets/images';
 import { setI18nConfig, RNLocalize, t } from './src/utils/LocalizationUtils';
@@ -115,12 +120,18 @@ const startApp = () => {
   });
 };
 
+let isFirstTime: boolean = true;
+
 Navigation.events().registerAppLaunchedListener(() => {
-  buildTheme();
-  registerScreens();
-  setI18nConfig();
-  RNLocalize.addEventListener('change', () => {
+  if (isFirstTime) {
+    isFirstTime = false;
+    codePush.notifyAppReady();
+    buildTheme();
+    registerScreens();
     setI18nConfig();
-  });
+    RNLocalize.addEventListener('change', () => {
+      setI18nConfig();
+    });
+  }
   startApp();
 });

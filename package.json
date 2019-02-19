@@ -12,6 +12,7 @@
     "lodash.memoize": "^4.1.2",
     "react": "16.6.3",
     "react-native": "0.58.4",
+    "react-native-code-push": "^5.5.2",
     "react-native-localize": "^1.0.3",
     "react-native-navigation": "^2.12.0",
     "redux": "^4.0.1",
