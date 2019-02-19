@@ -2,6 +2,7 @@ import { Navigation } from 'react-native-navigation';
 import registerScreens from './src/screens';
 import images from './assets/images';
 import { setI18nConfig, RNLocalize, t } from './src/utils/LocalizationUtils';
+import { buildTheme } from './src/themes/config-theme';
 
 const startApp = () => {
   Navigation.setDefaultOptions({
@@ -115,6 +116,7 @@ const startApp = () => {
 };
 
 Navigation.events().registerAppLaunchedListener(() => {
+  buildTheme();
   registerScreens();
   setI18nConfig();
   RNLocalize.addEventListener('change', () => {
