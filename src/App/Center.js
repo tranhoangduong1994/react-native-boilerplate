@@ -3,18 +3,25 @@ import images from '../../assets/images';
 
 const createCenterMenu = () => ({
   id: 'center',
-  bottomTabs: {
+  stack: {
+    id: 'centerStack',
     children: [
-      createBottomTabStack('Home', t('tabs.Home'), images.home),
-      createBottomTabStack('Search', t('tabs.Search'), images.search),
-      createBottomTabStack('Chat', t('tabs.Chat'), images.message),
-      createBottomTabStack('Account', t('tabs.Account'), images.account)
-    ],
-    options: {
-      bottomTabs: {
-        titleDisplayMode: 'alwaysShow'
+      {
+        bottomTabs: {
+          children: [
+            createBottomTabStack('Home', t('tabs.Home'), images.home),
+            createBottomTabStack('Search', t('tabs.Search'), images.search),
+            createBottomTabStack('Chat', t('tabs.Chat'), images.message),
+            createBottomTabStack('Account', t('tabs.Account'), images.account)
+          ],
+          options: {
+            bottomTabs: {
+              titleDisplayMode: 'alwaysShow'
+            }
+          }
+        }
       }
-    }
+    ]
   }
 });
 

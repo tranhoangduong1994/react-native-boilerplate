@@ -10,7 +10,6 @@ import { buildTheme } from '../themes/config-theme';
 import createCenterMenu from './Center';
 import createLeftMenu from './Left';
 import createRightMenu from './Right';
-import images from '../../assets/images';
 
 let isFirstTime: boolean = true;
 
@@ -38,51 +37,8 @@ function startApp() {
       sideMenu: {
         id: 'mainSideMenu',
         left: createLeftMenu(),
-        // center: createCenterMenu(),
-        right: createRightMenu(),
-        center: {
-          stack: {
-            id: 'centerStack',
-            children: [
-              {
-                bottomTabs: {
-                  children: [
-                    {
-                      component: {
-                        name: 'Home',
-                        options: {
-                          topBar: {
-                            visible: false,
-                            height: 0
-                          },
-                          bottomTab: {
-                            text: 'Home',
-                            icon: images.home
-                          }
-                        }
-                      }
-                    },
-                    {
-                      component: {
-                        name: 'Search',
-                        options: {
-                          topBar: {
-                            visible: false,
-                            height: 0
-                          },
-                          bottomTab: {
-                            text: 'Search',
-                            icon: images.search
-                          }
-                        }
-                      }
-                    }
-                  ]
-                }
-              }
-            ]
-          }
-        }
+        center: createCenterMenu(),
+        right: createRightMenu()
       }
     }
   });
