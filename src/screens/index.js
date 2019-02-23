@@ -14,7 +14,6 @@ import RightMenu from './RightMenu';
 import Projects from './Projects';
 import Exchange from './Exchange';
 import ForRent from './ForRent';
-import Lock from './Lock';
 
 type ScreenComponent = {
   name: string,
