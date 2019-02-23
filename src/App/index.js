@@ -16,10 +16,10 @@ import configStore from '../store/index';
 let isFirstTime: boolean = true;
 let store = null;
 
-Navigation.events().registerAppLaunchedListener(() => {
+Navigation.events().registerAppLaunchedListener(async () => {
   if (isFirstTime) {
     isFirstTime = false;
-    init();
+    await init();
   }
   startApp();
 });
