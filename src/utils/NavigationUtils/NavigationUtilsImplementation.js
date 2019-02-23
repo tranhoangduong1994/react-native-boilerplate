@@ -32,7 +32,7 @@ class NavigationUtilsImplementation {
     );
   }
 
-  async showLeftMenuScreen(layout: Layout) {
+  async push(layout: Layout, force: boolean) {
     Navigation.mergeOptions('mainSideMenu', {
       sideMenu: {
         left: {
@@ -43,7 +43,7 @@ class NavigationUtilsImplementation {
 
     const { name } = layout.component;
 
-    if (this.isTopStackComponentNamed(name)) {
+    if (this.isTopStackComponentNamed(name) && !force) {
       return null;
     }
 
@@ -52,10 +52,6 @@ class NavigationUtilsImplementation {
       popGesture: false
     });
     return Navigation.push('centerStack', layout);
-  }
-
-  push(componentId: string, layout: Layout) {
-    return Navigation.push(componentId, layout);
   }
 
   mergeOptions(componentId: string, options: Options) {

@@ -6,12 +6,8 @@ import type { Layout, Options } from 'react-native-navigation';
 import NavigationUtilsImplementation from './NavigationUtilsImplementation';
 
 class NavigationUtils {
-  static showLeftMenuScreen(layout: Layout) {
-    return NavigationUtilsImplementation.getInstance().showLeftMenuScreen(layout);
-  }
-
-  static push(componentId: string, layout: Layout) {
-    return NavigationUtilsImplementation.getInstance().push(componentId, layout);
+  static push(layout: Layout, force: boolean = false) {
+    return NavigationUtilsImplementation.getInstance().push(layout, force);
   }
 
   static mergeOptions(componentId: string, options: Options) {

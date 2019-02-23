@@ -16,7 +16,7 @@ export default class LeftMenu extends React.Component<Props> {
     {
       title: t('leftMenuItems.Projects'),
       callback: () => {
-        NavigationUtils.showLeftMenuScreen({
+        NavigationUtils.push({
           component: {
             name: 'Projects'
           }
@@ -26,7 +26,7 @@ export default class LeftMenu extends React.Component<Props> {
     {
       title: t('leftMenuItems.Exchange'),
       callback: () => {
-        NavigationUtils.showLeftMenuScreen({
+        NavigationUtils.push({
           component: {
             name: 'Exchange'
           }
@@ -36,7 +36,7 @@ export default class LeftMenu extends React.Component<Props> {
     {
       title: t('leftMenuItems.ForRent'),
       callback: () => {
-        NavigationUtils.showLeftMenuScreen({
+        NavigationUtils.push({
           component: {
             name: 'ForRent'
           }
