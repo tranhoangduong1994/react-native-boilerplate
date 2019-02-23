@@ -14,18 +14,19 @@ import RightMenu from './RightMenu';
 import Projects from './Projects';
 import Exchange from './Exchange';
 import ForRent from './ForRent';
+import Lock from './Lock';
 
 type ScreenComponent = {
   name: string,
   component: React.Component | React.PureComponent
 };
 
-function registerScreens() {
-  withStatusBarScreens.forEach((screen: ScreenComponent) => registerScreen(screen));
+function registerScreens(store, provider) {
+  withStatusBarScreens.forEach((screen: ScreenComponent) => registerScreen(screen, store, provider));
 }
 
-function registerScreen({ name, component }: ScreenComponent) {
-  Navigation.registerComponent(name, () => withStatusBar(component));
+function registerScreen({ name, component }: ScreenComponent, store, provider) {
+  Navigation.registerComponentWithRedux(name, () => withStatusBar(component), provider, store);
 }
 
 function withStatusBar(Component: React.Component | React.PureComponent) {

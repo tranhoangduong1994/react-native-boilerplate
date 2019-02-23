@@ -2,6 +2,7 @@
  * @flow
  */
 
+import { Provider } from 'react-redux';
 import { Navigation } from 'react-native-navigation';
 import codePush from 'react-native-code-push';
 import registerScreens from '../screens';
@@ -10,8 +11,10 @@ import { buildTheme } from '../themes/config-theme';
 import createCenterMenu from './Center';
 import createLeftMenu from './Left';
 import createRightMenu from './Right';
+import configStore from '../store/index';
 
 let isFirstTime: boolean = true;
+let store = null;
 
 Navigation.events().registerAppLaunchedListener(() => {
   if (isFirstTime) {
@@ -21,10 +24,14 @@ Navigation.events().registerAppLaunchedListener(() => {
   startApp();
 });
 
-function init() {
+function handleSubscribe() {}
+
+async function init() {
   codePush.notifyAppReady();
   buildTheme();
-  registerScreens();
+  store = await configStore();
+  store.subscribe(handleSubscribe);
+  registerScreens(store, Provider);
   setI18nConfig();
   RNLocalize.addEventListener('change', () => {
     setI18nConfig();
