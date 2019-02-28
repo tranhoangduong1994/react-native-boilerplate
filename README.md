@@ -17,3 +17,9 @@ Testing libraries:
 Other supporting libraries: 
 - [x] Babel
 - [x] Flow 
+
+To start off the mock API server:
+1. Install json-server
+```yarn global add json-server```
+2. Run this command from the project root folder (which contains the `db.json` file)
+```json-server --watch db.json```
