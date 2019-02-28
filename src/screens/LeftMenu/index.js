@@ -16,7 +16,14 @@ export default class LeftMenu extends React.Component<Props> {
     {
       title: t('leftMenuItems.Projects'),
       callback: () => {
-        Navigation.push('centerStack', {
+        Navigation.mergeOptions('mainSideMenu', {
+          sideMenu: {
+            left: {
+              visible: false
+            }
+          }
+        });
+        Navigation.push('Home', {
           component: {
             name: 'Projects'
           }
@@ -26,7 +33,14 @@ export default class LeftMenu extends React.Component<Props> {
     {
       title: t('leftMenuItems.Exchange'),
       callback: () => {
-        Navigation.push('centerStack', {
+        Navigation.mergeOptions('mainSideMenu', {
+          sideMenu: {
+            left: {
+              visible: false
+            }
+          }
+        });
+        Navigation.push('Home', {
           component: {
             name: 'Exchange'
           }
@@ -36,7 +50,14 @@ export default class LeftMenu extends React.Component<Props> {
     {
       title: t('leftMenuItems.ForRent'),
       callback: () => {
-        Navigation.push('centerStack', {
+        Navigation.mergeOptions('mainSideMenu', {
+          sideMenu: {
+            left: {
+              visible: false
+            }
+          }
+        });
+        Navigation.push('Home', {
           component: {
             name: 'ForRent'
           }

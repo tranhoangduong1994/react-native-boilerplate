@@ -1,0 +1,24 @@
+{
+  "posts": [
+    {
+      "title": "The Lord of the Rings 2",
+      "author": "J. R. R. Tolkien",
+      "id": 1
+    },
+    {
+      "title": "Harry Potter",
+      "author": "J. K. Rowling",
+      "id": 2
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
