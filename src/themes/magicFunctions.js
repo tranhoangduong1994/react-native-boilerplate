@@ -6,10 +6,6 @@ export default {
     oh: () => ({
       overflow: 'hidden'
     }),
-    whn: () => ({
-      width: null,
-      height: null
-    }),
     wd: val => ({
       width: Number(val)
     }),
@@ -26,14 +22,53 @@ export default {
     brs: val => ({
       borderRadius: Number(val)
     }),
-    mtNeg: val => ({
-      marginTop: -Number(val)
-    }),
     z: val => ({
       zIndex: Number(val)
     }),
     bbw: val => ({
       borderBottomWidth: Number(val)
+    }),
+    pan: val => ({
+      padding: Number(val)
+    }),
+    phn: val => ({
+      paddingHorizontal: Number(val)
+    }),
+    pvn: val => ({
+      paddingVertical: Number(val)
+    }),
+    ptn: val => ({
+      paddingTop: Number(val)
+    }),
+    pbn: val => ({
+      paddingBottom: Number(val)
+    }),
+    pln: val => ({
+      paddingLeft: Number(val)
+    }),
+    prn: val => ({
+      paddingRight: Number(val)
+    }),
+    man: val => ({
+      margin: Number(val)
+    }),
+    mhn: val => ({
+      marginHorizontal: Number(val)
+    }),
+    mvn: val => ({
+      marginVertical: Number(val)
+    }),
+    mtn: val => ({
+      marginTop: Number(val)
+    }),
+    mbn: val => ({
+      marginBottom: Number(val)
+    }),
+    mln: val => ({
+      marginLeft: Number(val)
+    }),
+    mrn: val => ({
+      marginRight: Number(val)
     })
   }
 };
