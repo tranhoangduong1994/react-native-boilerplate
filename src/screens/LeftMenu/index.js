@@ -4,11 +4,11 @@
 
 import React from 'react';
 import { View, Text } from 'react-native';
+import { Navigation } from 'react-native-navigation';
 import type { MenuItemProps } from './LeftMenuItem';
 
 import { t } from '../../utils/LocalizationUtils';
 import MenuItem from './LeftMenuItem';
-import NavigationUtils from '../../utils/NavigationUtils';
 
 type Props = {};
 export default class LeftMenu extends React.Component<Props> {
@@ -16,7 +16,7 @@ export default class LeftMenu extends React.Component<Props> {
     {
       title: t('leftMenuItems.Projects'),
       callback: () => {
-        NavigationUtils.push({
+        Navigation.push('centerStack', {
           component: {
             name: 'Projects'
           }
@@ -26,7 +26,7 @@ export default class LeftMenu extends React.Component<Props> {
     {
       title: t('leftMenuItems.Exchange'),
       callback: () => {
-        NavigationUtils.push({
+        Navigation.push('centerStack', {
           component: {
             name: 'Exchange'
           }
@@ -36,7 +36,7 @@ export default class LeftMenu extends React.Component<Props> {
     {
       title: t('leftMenuItems.ForRent'),
       callback: () => {
-        NavigationUtils.push({
+        Navigation.push('centerStack', {
           component: {
             name: 'ForRent'
           }
