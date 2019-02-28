@@ -1,13 +1,14 @@
 {
-  "tabs": {
-    "Home": "Trang chủ",
-    "Search": "Tìm kiếm",
-    "Chat": "Chat",
-    "Account": "Tài khoản"
-  },
   "leftMenuItems": {
     "Projects": "Dự án",
     "Exchange": "Mua bán",
     "ForRent": "Cho thuê"
+  },
+  "post": {
+    "add": "Thêm bài viết",
+    "save": "Lưu thay đổi",
+    "delete": "Xoá bài viết",
+    "title": "Tiêu đề",
+    "author": "Tác giả"
   }
 }
