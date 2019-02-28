@@ -89,7 +89,7 @@ export const createRequestSaga = ({
     } else {
       const { status, data } = response;
       ret = data;
-      if (status === 200) {
+      if (status < 400) {
         yield put(markRequestSuccess(requestKey));
       } else {
         throw new Error(`RequestError - ${status}`);
