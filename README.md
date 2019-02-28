@@ -1,5 +1,6 @@
 # react-native-boilerplate
 
+## What is it?
 A boilerplate for React Native projects, with these following libraries integrated:
 
 Development libraries: 
@@ -19,12 +20,29 @@ Other supporting libraries:
 - [x] Babel
 - [x] Flow 
 
-To start off the mock API server:
-1. Install json-server
+
+
+#### How to run
+1. Install javascript dependencies
+```
+yarn
+```
+2. Run the app
+##### iOS
+```
+react-native run-ios
+```
+##### Android
+```
+react-native run-android
+```
+
+#### To start off the mock API server:
+##### 1. Install json-server
 ```
 yarn global add json-server
 ```
-2. Run this command from the project root folder (which contains the `db.json` file)
+##### 2. Run this command from the project root folder (which contains the `db.json` file)
 ```
 json-server --watch db.json
 ```
