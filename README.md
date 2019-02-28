@@ -23,16 +23,17 @@ Other supporting libraries:
 
 
 ## How to run
+#### To run the client app:
 1. Install javascript dependencies
 ```
 yarn
 ```
 2. Run the app
-#### iOS
+##### iOS
 ```
 react-native run-ios
 ```
-#### Android
+##### Android
 ```
 react-native run-android
 ```
