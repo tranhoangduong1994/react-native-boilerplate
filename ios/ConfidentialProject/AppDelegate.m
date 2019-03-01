@@ -19,9 +19,14 @@
   NSURL *jsCodeLocation;
 
   #ifdef DEBUG
-      jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
+  jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
   #else
-      jsCodeLocation = [CodePush bundleURL];
+  const NSURL *codePushBundleURL = [CodePush bundleURL];
+  if (codePushBundleURL != nil) {
+    jsCodeLocation = codePushBundleURL;
+  } else {
+    jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
+  }
   #endif
 
   [ReactNativeNavigation bootstrap:jsCodeLocation launchOptions:launchOptions];
