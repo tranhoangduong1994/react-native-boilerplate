@@ -1,11 +1,12 @@
 import React from 'react';
+import { compose } from 'redux';
 import { View } from 'react-native';
 import { reduxForm } from 'redux-form';
 import { wrap } from '@agiletechvn/react-theme';
 import { connect } from 'react-redux';
 import { Navigation } from 'react-native-navigation';
 import PostDetails from '../../../components/PostDetails';
-import { updatePost, deletePost } from '../../../store/actions/post';
+import * as PostActions from '../../../store/actions/post';
 import RoundedButton from '../../../elements/RoundedButton';
 import { t } from '../../../utils/LocalizationUtils';
 
@@ -18,61 +19,59 @@ type Props = {
   handleSubmit: any => void
 };
 
-@connect(
-  null,
-  {
-    updatePost,
-    deletePost
-  },
-  (stateProps, dispatchProps, ownProps) => ({
-    initialValues: {
-      title: ownProps.title,
-      author: ownProps.author
-    },
-    ...stateProps,
-    ...dispatchProps,
-    ...ownProps
-  })
-)
-@reduxForm({
-  form: 'PostDetails'
-})
-@wrap
-class PostEdit extends React.PureComponent<Props> {
-  onSubmit = (values) => {
-    const { id } = this.props;
+const PostEdit = (props: Props) => {
+  const {
+    componentId, id, updatePost, deletePost, onFinishEditing, handleSubmit
+  } = props;
+
+  function onSubmit(values) {
     const { title, author } = values;
-    this.props.updatePost({ id, title, author }, this.onSubmitResponded);
-  };
+    updatePost({ id, title, author }, onSubmitResponded);
+  }
 
-  onDelete = () => {
-    const { id } = this.props;
-    this.props.deletePost({ id }, this.onSubmitResponded);
-  };
+  function onDelete() {
+    deletePost({ id }, onSubmitResponded);
+  }
 
-  onSubmitResponded = async (err) => {
+  async function onSubmitResponded(err) {
     if (err) {
       return;
     }
 
-    await Navigation.pop(this.props.componentId);
-    this.props.onFinishEditing();
-  };
-
-  render() {
-    return (
-      <View cls="flx-i pa3">
-        <PostDetails />
-        <RoundedButton
-          label={t('post.delete')}
-          callback={this.props.handleSubmit(this.onDelete)}
-          containerCls="bg-red"
-        />
-        <View cls="hg-10" />
-        <RoundedButton label={t('post.save')} callback={this.props.handleSubmit(this.onSubmit)} />
-      </View>
-    );
+    await Navigation.pop(componentId);
+    onFinishEditing();
   }
-}
 
-export default PostEdit;
+  return (
+    <View cls="flx-i pa3">
+      <PostDetails />
+      <RoundedButton
+        label={t('post.delete')}
+        callback={handleSubmit(onDelete)}
+        containerCls="bg-red"
+      />
+      <View cls="hg-10" />
+      <RoundedButton label={t('post.save')} callback={handleSubmit(onSubmit)} />
+    </View>
+  );
+};
+
+export default compose(
+  connect(
+    null,
+    { ...PostActions },
+    (stateProps, dispatchProps, ownProps) => ({
+      initialValues: {
+        title: ownProps.title,
+        author: ownProps.author
+      },
+      ...stateProps,
+      ...dispatchProps,
+      ...ownProps
+    })
+  ),
+  reduxForm({
+    form: 'PostDetails'
+  }),
+  wrap
+)(PostEdit);

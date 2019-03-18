@@ -24,17 +24,12 @@ const ReduxifiedTextInput = wrap(({ input, ...rest }) => {
   );
 });
 
-@wrap
-class PostDetails extends React.PureComponent {
-  render() {
-    return (
-      <View cls="flx-i">
-        <Field name="title" component={ReduxifiedTextInput} placeholder={t('post.title')} />
-        <View cls="hg-8" />
-        <Field name="author" component={ReduxifiedTextInput} placeholder={t('post.author')} />
-      </View>
-    );
-  }
-}
+const PostDetails = () => (
+  <View cls="flx-i">
+    <Field name="title" component={ReduxifiedTextInput} placeholder={t('post.title')} />
+    <View cls="hg-8" />
+    <Field name="author" component={ReduxifiedTextInput} placeholder={t('post.author')} />
+  </View>
+);
 
-export default PostDetails;
+export default wrap(PostDetails);

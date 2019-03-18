@@ -8,20 +8,21 @@ import type { MenuItemProps } from './LeftMenuItem';
 
 import MenuItem from './LeftMenuItem';
 
-type Props = {};
-export default class LeftMenu extends React.Component<Props> {
-  menuItems: MenuItemProps = [];
+const LeftMenu = () => {
+  const menuItems: MenuItemProps = [];
 
-  renderLeftMenuItems = () => this.menuItems.map(({ title, callback }: MenuItemProps) => (
-    <MenuItem title={title} callback={callback} key={title} />
-  ));
-
-  render() {
-    return (
-      <View>
-        <Text testID="welcome">LeftMenu</Text>
-        {this.renderLeftMenuItems()}
-      </View>
-    );
+  function renderLeftMenuItems() {
+    menuItems.map(({ title, callback }: MenuItemProps) => (
+      <MenuItem title={title} callback={callback} key={title} />
+    ));
   }
-}
+
+  return (
+    <View>
+      <Text testID="welcome">LeftMenu</Text>
+      {renderLeftMenuItems()}
+    </View>
+  );
+};
+
+export default LeftMenu;

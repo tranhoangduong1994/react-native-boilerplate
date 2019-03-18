@@ -49,7 +49,6 @@ export const createRequestSaga = ({
   onErrorActionCreators = [],
   onCancelActionCreators = []
 }) => function* requestGenerator(action) {
-  console.log('ererer', action);
   let args = action.args || [];
 
   const callback = typeof args[args.length - 1] === 'function' ? args[args.length - 1] : null;

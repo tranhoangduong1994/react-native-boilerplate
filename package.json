@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@agiletechvn/react-theme": "https://github.com/tranhoangduong1994/react-theme.git",
+    "@react-native-community/async-storage": "^1.2.1",
     "apisauce": "^1.0.2",
     "i18n-js": "^3.2.1",
     "jwt-decode": "^2.2.0",

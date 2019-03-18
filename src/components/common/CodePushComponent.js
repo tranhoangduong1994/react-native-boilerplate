@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect } from 'react';
 import codePush from 'react-native-code-push';
 
 const codePushOptions = {
@@ -6,14 +6,12 @@ const codePushOptions = {
   checkFrequency: codePush.CheckFrequency.ON_APP_RESUME
 };
 
-class CodePushComponent extends React.PureComponent {
-  componentDidMount() {
+const CodePushComponent = () => {
+  useEffect(() => {
     codePush.sync();
-  }
+  }, []);
 
-  render() {
-    return null;
-  }
-}
+  return null;
+};
 
 export default codePush(codePushOptions)(CodePushComponent);

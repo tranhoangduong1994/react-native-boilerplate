@@ -1,12 +1,9 @@
+import { AUTH_SERVER } from 'react-native-dotenv';
 import { create } from 'apisauce';
 import qs from 'qs';
 
-const baseURL = 'http://localhost:3000';
-const timeout = 3000;
-
 export const API = create({
-  baseURL,
-  timeout
+  baseURL: AUTH_SERVER
 });
 
 API.addRequestTransform((request) => {
