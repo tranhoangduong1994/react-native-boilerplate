@@ -1,5 +1,4 @@
 import { all, takeLatest } from 'redux-saga/effects';
-import { createRequestSaga } from './RequestSagaUtils';
 import {
   ACTION_GET_POSTS,
   ACTION_ADD_POST,
@@ -8,6 +7,7 @@ import {
   ACTION_GET_POST_DETAILS
 } from '../constants';
 import PostAPIs from '../APIs/post';
+import { createRequestSaga } from '../../utils/RequestSagaUtils';
 
 const requestGetPosts = createRequestSaga({
   request: PostAPIs.getPosts,
