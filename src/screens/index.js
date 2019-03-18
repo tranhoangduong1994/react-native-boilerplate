@@ -8,9 +8,6 @@ import { Navigation } from 'react-native-navigation';
 import Home from './Home';
 import LeftMenu from './LeftMenu';
 import RightMenu from './RightMenu';
-import Projects from './Projects';
-import Exchange from './Exchange';
-import ForRent from './ForRent';
 import PostAdd from './Home/PostAdd';
 import PostEdit from './Home/PostEdit';
 
@@ -54,18 +51,6 @@ const withStatusBarScreens: [ScreenComponent] = [
   {
     name: 'Home',
     component: Home
-  },
-  {
-    name: 'Projects',
-    component: Projects
-  },
-  {
-    name: 'Exchange',
-    component: Exchange
-  },
-  {
-    name: 'ForRent',
-    component: ForRent
   },
   {
     name: 'PostAdd',
