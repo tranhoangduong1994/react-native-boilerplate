@@ -9,6 +9,7 @@ import PostDetails from '../../../components/PostDetails';
 import * as PostActions from '../../../store/actions/post';
 import RoundedButton from '../../../elements/RoundedButton';
 import { t } from '../../../utils/LocalizationUtils';
+import { callSagaRequest } from '../../../utils/RequestSagaUtils';
 
 type Props = {
   componentId: String,
@@ -22,18 +23,15 @@ const PostAdd = (props: Props) => {
     componentId, addPost, onFinishEditing, handleSubmit
   } = props;
 
-  function onSubmit(values) {
+  async function onSubmit(values) {
     const { title, author } = values;
-    addPost({ title, author }, onSubmitResponded);
-  }
-
-  async function onSubmitResponded(err) {
-    if (err) {
-      return;
+    try {
+      await callSagaRequest(addPost, { title, author });
+      await Navigation.pop(componentId);
+      onFinishEditing();
+    } catch (err) {
+      console.log('Add post error', err);
     }
-
-    await Navigation.pop(componentId);
-    onFinishEditing();
   }
 
   return (

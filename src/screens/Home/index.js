@@ -13,6 +13,7 @@ import * as PostActions from '../../store/actions/post';
 import PostList from '../../elements/PostList';
 import ImageButton from '../../elements/ImageButton';
 import images from '../../../assets/images';
+import { callSagaRequest } from '../../utils/RequestSagaUtils';
 
 type Props = {
   getPosts: (() => void) => void,
@@ -29,18 +30,15 @@ const Home = (props: Props) => {
     fetchPosts();
   }, []);
 
-  function fetchPosts() {
+  async function fetchPosts() {
     setLoading(true);
-    getPosts(onGetPostsResponeded);
-  }
-
-  function onGetPostsResponeded(err, ret) {
-    if (err) {
-      return;
+    try {
+      const postsResult = await callSagaRequest(getPosts);
+      setLoading(false);
+      setPosts(postsResult);
+    } catch (err) {
+      console.log('Fetch posts error', err);
     }
-
-    setLoading(false);
-    setPosts(ret);
   }
 
   function onAddPress() {
@@ -80,28 +78,25 @@ const Home = (props: Props) => {
     );
   }
 
-  function onPostListItemSelect(id) {
-    getPostDetails({ id }, onGetPostDetailsResponded);
-  }
+  async function onPostListItemSelect(id) {
+    try {
+      const postDetailsResult = await callSagaRequest(getPostDetails, { id });
+      const { title, author } = postDetailsResult;
 
-  function onGetPostDetailsResponded(err, ret) {
-    if (err) {
-      return;
-    }
-
-    const { id, title, author } = ret;
-
-    Navigation.push(componentId, {
-      component: {
-        name: 'PostEdit',
-        passProps: {
-          id,
-          title,
-          author,
-          onFinishEditing
+      Navigation.push(componentId, {
+        component: {
+          name: 'PostEdit',
+          passProps: {
+            id,
+            title,
+            author,
+            onFinishEditing
+          }
         }
-      }
-    });
+      });
+    } catch (err) {
+      console.log('Fetch post details error', err);
+    }
   }
 
   function renderAddPostButton() {

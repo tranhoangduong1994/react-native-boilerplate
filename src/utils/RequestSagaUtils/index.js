@@ -5,6 +5,15 @@ import tokenSaga from './token/saga';
 import tokenReducer from './token/reducer';
 import { getAccessToken } from './token/selectors';
 
+const callSagaRequest = (sagaRequestFunction, ...params) => new Promise((resolve, reject) => {
+  sagaRequestFunction(...params, (err, ret) => {
+    if (!err) {
+      resolve(ret);
+    }
+    reject(err);
+  });
+});
+
 const requestUtilsSaga = function* generator() {
   yield all([
     ...authSaga.map(watcher => fork(watcher)),
@@ -13,5 +22,5 @@ const requestUtilsSaga = function* generator() {
 };
 
 export {
-  createRequestSaga, requestUtilsSaga, tokenReducer, getAccessToken
+  createRequestSaga, callSagaRequest, requestUtilsSaga, tokenReducer, getAccessToken
 };

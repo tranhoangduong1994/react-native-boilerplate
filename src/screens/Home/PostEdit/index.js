@@ -9,6 +9,7 @@ import PostDetails from '../../../components/PostDetails';
 import * as PostActions from '../../../store/actions/post';
 import RoundedButton from '../../../elements/RoundedButton';
 import { t } from '../../../utils/LocalizationUtils';
+import { callSagaRequest } from '../../../utils/RequestSagaUtils';
 
 type Props = {
   componentId: String,
@@ -24,22 +25,25 @@ const PostEdit = (props: Props) => {
     componentId, id, updatePost, deletePost, onFinishEditing, handleSubmit
   } = props;
 
-  function onSubmit(values) {
+  async function onSubmit(values) {
     const { title, author } = values;
-    updatePost({ id, title, author }, onSubmitResponded);
-  }
-
-  function onDelete() {
-    deletePost({ id }, onSubmitResponded);
-  }
-
-  async function onSubmitResponded(err) {
-    if (err) {
-      return;
+    try {
+      await callSagaRequest(updatePost, { id, title, author });
+      await Navigation.pop(componentId);
+      onFinishEditing();
+    } catch (err) {
+      console.log('Edit post error', err);
     }
+  }
 
-    await Navigation.pop(componentId);
-    onFinishEditing();
+  async function onDelete() {
+    try {
+      await callSagaRequest(deletePost, { id });
+      await Navigation.pop(componentId);
+      onFinishEditing();
+    } catch (err) {
+      console.log('Delete post error', err);
+    }
   }
 
   return (
