@@ -1,27 +1,21 @@
 import React from 'react';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
 import { View } from 'react-native';
-import { reduxForm } from 'redux-form';
 import { wrap } from '@agiletechvn/react-theme';
 import { Navigation } from 'react-native-navigation';
 import PostDetails from '../../../components/PostDetails';
-import * as PostActions from '../../../store/actions/post';
 import RoundedButton from '../../../elements/RoundedButton';
 import { t } from '../../../utils/LocalizationUtils';
 import { callSagaRequest } from '../../../utils/RequestSagaUtils';
+import { addPost } from '../../../store/actions/post';
+import ContextifiedFormik from '../../../components/common/ContextifiedFormik';
 
 type Props = {
   componentId: String,
-  addPost: ({}, () => void) => void,
-  onFinishEditing: () => void,
-  handleSubmit: any => void
+  onFinishEditing: () => void
 };
 
 const PostAdd = (props: Props) => {
-  const {
-    componentId, addPost, onFinishEditing, handleSubmit
-  } = props;
+  const { componentId, onFinishEditing } = props;
 
   async function onSubmit(values) {
     const { title, author } = values;
@@ -35,18 +29,16 @@ const PostAdd = (props: Props) => {
   }
 
   return (
-    <View cls="flx-i pa3">
-      <PostDetails />
-      <RoundedButton label={t('post.add')} callback={handleSubmit(onSubmit)} />
-    </View>
+    <ContextifiedFormik
+      onSubmit={onSubmit}
+      render={wrap(formProps => (
+        <View cls="flx-i pa3">
+          <PostDetails />
+          <RoundedButton label={t('post.add')} callback={formProps.handleSubmit} />
+        </View>
+      ))}
+    />
   );
 };
 
-export default compose(
-  connect(
-    null,
-    { ...PostActions }
-  ),
-  reduxForm({ form: 'PostDetails' }),
-  wrap
-)(PostAdd);
+export default wrap(PostAdd);

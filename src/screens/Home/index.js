@@ -2,58 +2,34 @@
  * @flow
  */
 
-import React, { useState, useEffect } from 'react';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
+import React from 'react';
 import { View, ActivityIndicator } from 'react-native';
 import { wrap } from '@agiletechvn/react-theme';
 import { Navigation } from 'react-native-navigation';
 import CodePushComponent from '../../components/common/CodePushComponent';
-import * as PostActions from '../../store/actions/post';
 import PostList from '../../elements/PostList';
 import ImageButton from '../../elements/ImageButton';
 import images from '../../../assets/images';
-import { callSagaRequest } from '../../utils/RequestSagaUtils';
+import usePosts from './usePosts';
 
 type Props = {
-  getPosts: (() => void) => void,
-  getPostDetails: () => void,
   componentId: String
 };
 
 const Home = (props: Props) => {
-  const { getPosts, getPostDetails, componentId } = props;
-  const [loading, setLoading] = useState(false);
-  const [posts, setPosts] = useState([]);
+  const { componentId } = props;
 
-  useEffect(() => {
-    fetchPosts();
-  }, []);
-
-  async function fetchPosts() {
-    setLoading(true);
-    try {
-      const postsResult = await callSagaRequest(getPosts);
-      setLoading(false);
-      setPosts(postsResult);
-    } catch (err) {
-      console.log('Fetch posts error', err);
-    }
-  }
+  const { posts, loadPosts, loading } = usePosts();
 
   function onAddPress() {
     Navigation.push(componentId, {
       component: {
         name: 'PostAdd',
         passProps: {
-          onFinishEditing
+          onFinishEditing: loadPosts
         }
       }
     });
-  }
-
-  function onFinishEditing() {
-    fetchPosts();
   }
 
   function renderPostList() {
@@ -71,7 +47,7 @@ const Home = (props: Props) => {
           cls="flx-i bw-2"
           posts={posts}
           refreshing={loading}
-          onRefresh={fetchPosts}
+          onRefresh={loadPosts}
           onItemSelect={onPostListItemSelect}
         />
       </View>
@@ -80,17 +56,12 @@ const Home = (props: Props) => {
 
   async function onPostListItemSelect(id) {
     try {
-      const postDetailsResult = await callSagaRequest(getPostDetails, { id });
-      const { title, author } = postDetailsResult;
-
       Navigation.push(componentId, {
         component: {
           name: 'PostEdit',
           passProps: {
             id,
-            title,
-            author,
-            onFinishEditing
+            onFinishEditing: loadPosts
           }
         }
       });
@@ -116,10 +87,4 @@ const Home = (props: Props) => {
   );
 };
 
-export default compose(
-  connect(
-    null,
-    { ...PostActions }
-  ),
-  wrap
-)(Home);
+export default wrap(Home);

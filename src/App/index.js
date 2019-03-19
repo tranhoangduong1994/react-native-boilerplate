@@ -50,3 +50,5 @@ function startApp() {
     }
   });
 }
+
+export { store };

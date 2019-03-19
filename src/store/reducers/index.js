@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-import { reducer as form } from 'redux-form';
 import common from './common';
+import { tokenReducer } from '../../utils/RequestSagaUtils';
 
 const reducers = combineReducers({
-  form,
-  common
+  common,
+  tokenReducer
 });
 
 export default reducers;

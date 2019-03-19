@@ -1,34 +1,32 @@
 import React from 'react';
-import { compose } from 'redux';
-import { View } from 'react-native';
-import { reduxForm } from 'redux-form';
+import { View, ActivityIndicator } from 'react-native';
 import { wrap } from '@agiletechvn/react-theme';
-import { connect } from 'react-redux';
+
 import { Navigation } from 'react-native-navigation';
 import PostDetails from '../../../components/PostDetails';
-import * as PostActions from '../../../store/actions/post';
+
 import RoundedButton from '../../../elements/RoundedButton';
 import { t } from '../../../utils/LocalizationUtils';
-import { callSagaRequest } from '../../../utils/RequestSagaUtils';
+import usePost from './usePost';
+import ContextifiedFormik from '../../../components/common/ContextifiedFormik';
 
 type Props = {
   componentId: String,
   id: String,
-  updatePost: ({}, () => void) => void,
-  deletePost: ({}, () => void) => void,
-  onFinishEditing: () => void,
-  handleSubmit: any => void
+  onFinishEditing: () => void
 };
 
 const PostEdit = (props: Props) => {
+  const { componentId, id, onFinishEditing } = props;
+
   const {
-    componentId, id, updatePost, deletePost, onFinishEditing, handleSubmit
-  } = props;
+    post, updatePost, deletePost, loading
+  } = usePost(id);
 
   async function onSubmit(values) {
     const { title, author } = values;
     try {
-      await callSagaRequest(updatePost, { id, title, author });
+      await updatePost(title, author);
       await Navigation.pop(componentId);
       onFinishEditing();
     } catch (err) {
@@ -38,7 +36,7 @@ const PostEdit = (props: Props) => {
 
   async function onDelete() {
     try {
-      await callSagaRequest(deletePost, { id });
+      await deletePost();
       await Navigation.pop(componentId);
       onFinishEditing();
     } catch (err) {
@@ -46,36 +44,34 @@ const PostEdit = (props: Props) => {
     }
   }
 
-  return (
-    <View cls="flx-i pa3">
-      <PostDetails />
-      <RoundedButton
-        label={t('post.delete')}
-        callback={handleSubmit(onDelete)}
-        containerCls="bg-red"
+  function renderPostDetails() {
+    if (loading) {
+      return (
+        <View cls="flx-i">
+          <ActivityIndicator />
+        </View>
+      );
+    }
+
+    const { title, author } = post;
+
+    return (
+      <ContextifiedFormik
+        initialValues={{ author, title }}
+        onSubmit={onSubmit}
+        render={wrap(formProps => (
+          <View cls="flx-i pa3">
+            <PostDetails />
+            <RoundedButton label={t('post.delete')} callback={onDelete} containerCls="bg-red" />
+            <View cls="hg-10" />
+            <RoundedButton label={t('post.save')} callback={formProps.handleSubmit} />
+          </View>
+        ))}
       />
-      <View cls="hg-10" />
-      <RoundedButton label={t('post.save')} callback={handleSubmit(onSubmit)} />
-    </View>
-  );
+    );
+  }
+
+  return <View cls="flx-i">{renderPostDetails()}</View>;
 };
 
-export default compose(
-  connect(
-    null,
-    { ...PostActions },
-    (stateProps, dispatchProps, ownProps) => ({
-      initialValues: {
-        title: ownProps.title,
-        author: ownProps.author
-      },
-      ...stateProps,
-      ...dispatchProps,
-      ...ownProps
-    })
-  ),
-  reduxForm({
-    form: 'PostDetails'
-  }),
-  wrap
-)(PostEdit);
+export default wrap(PostEdit);

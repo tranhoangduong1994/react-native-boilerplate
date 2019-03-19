@@ -2,34 +2,34 @@
  * @flow
  */
 
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, TextInput } from 'react-native';
-import { Field } from 'redux-form';
 import { wrap } from '@agiletechvn/react-theme';
 import { t } from '../utils/LocalizationUtils';
+import { FormikContext } from './common/ContextifiedFormik';
 
-const ReduxifiedTextInput = wrap(({ input, ...rest }) => {
-  const {
-    onChange, value, onBlur, onFocus
-  } = input;
+const PostDetails = () => {
+  const formProps = useContext(FormikContext);
+  const { handleChange, values } = formProps;
+  const { title, author } = values;
+
   return (
-    <TextInput
-      {...rest}
-      cls="bw-1 f5 pa2"
-      value={value}
-      onChangeText={onChange}
-      onBlur={onBlur}
-      onFocus={onFocus}
-    />
+    <View cls="flx-i">
+      <TextInput
+        cls="ba pa2"
+        onChangeText={handleChange('title')}
+        placeholder={t('post.title')}
+        value={title}
+      />
+      <View cls="hg-8" />
+      <TextInput
+        cls="ba pa2"
+        onChangeText={handleChange('author')}
+        placeholder={t('post.author')}
+        value={author}
+      />
+    </View>
   );
-});
-
-const PostDetails = () => (
-  <View cls="flx-i">
-    <Field name="title" component={ReduxifiedTextInput} placeholder={t('post.title')} />
-    <View cls="hg-8" />
-    <Field name="author" component={ReduxifiedTextInput} placeholder={t('post.author')} />
-  </View>
-);
+};
 
 export default wrap(PostDetails);
