@@ -31,9 +31,9 @@
   },
   "plugins": ["react", "jsx-a11y", "import", "flowtype"],
   "globals": {
-    "it": "readable",
-    "expect": "readable",
-    "describe": "readable",
-    "navigator": "readable"
+    "it": "readonly",
+    "expect": "readonly",
+    "describe": "readonly",
+    "navigator": "readonly"
   }
 }
