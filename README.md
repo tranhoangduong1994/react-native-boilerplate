@@ -1,5 +1,7 @@
 # react-native-boilerplate
 
+![](demo.gif)
+
 ## What is it?
 A boilerplate for React Native projects, with these following libraries integrated:
 
