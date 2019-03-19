@@ -8,7 +8,7 @@ Development libraries:
 - [x] React native localize: https://github.com/react-native-community/react-native-localize
 - [x] Redux: https://github.com/reduxjs/redux
 - [x] Redux saga: https://github.com/redux-saga/redux-saga
-- [x] Redux form: https://github.com/erikras/redux-form
+- [x] Formik: https://github.com/jaredpalmer/formik
 - [x] React theme: https://github.com/agiletechvn/react-theme
 - [x] React native codepush: https://github.com/Microsoft/react-native-code-push
 
