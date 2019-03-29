@@ -60,7 +60,7 @@ export const createRequestSaga = ({
   let err = null;
 
   const requestKey = typeof key === 'function' ? key(...args) : key;
-  activateAllActionCreators(onStartActionCreators);
+  yield activateAllActionCreators(onStartActionCreators);
 
   yield put(markRequestPending(requestKey));
 
@@ -103,7 +103,7 @@ export const createRequestSaga = ({
     }
 
     if (cancelRet) {
-      activateAllActionCreators(onCancelActionCreators, cancelRet, requestKey);
+      yield activateAllActionCreators(onCancelActionCreators, cancelRet, requestKey);
       yield put(markRequestCancelled(cancelRet, requestKey));
 
       throw new Error('RequestError - cancelled');
@@ -115,19 +115,19 @@ export const createRequestSaga = ({
       throw new Error(`RequestError - ${status}`);
     }
 
-    activateAllActionCreators(onSuccessActionCreators, data, action);
+    yield activateAllActionCreators(onSuccessActionCreators, data, action);
     yield put(markRequestSuccess(requestKey));
   } catch (error) {
     // eslint-disable-next-line no-console
     console.log('RequestSagaUtils error', error);
-    activateAllActionCreators(onErrorActionCreators);
+    yield activateAllActionCreators(onErrorActionCreators);
 
     yield put(markRequestFailed(error, requestKey));
 
     err = error;
   } finally {
     if (callback) {
-      activateAllActionCreators(onStopActionCreators);
+      yield activateAllActionCreators(onStopActionCreators);
       callback(err, ret);
     }
   }
